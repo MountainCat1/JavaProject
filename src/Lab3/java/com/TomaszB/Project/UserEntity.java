@@ -1,11 +1,10 @@
 package com.TomaszB.Project;
 
-public class UserEntity {
+import java.io.Serializable;
+
+public class UserEntity implements Serializable {
     private String name;
     private String email;
-
-
-
     private int id;
 
     public UserEntity(int id, String name, String email) {

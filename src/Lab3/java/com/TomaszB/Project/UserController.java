@@ -1,7 +1,9 @@
 package com.TomaszB.Project;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,18 +39,24 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping("/getUser")
-    public Object getUser(
-            @RequestParam(name = "id", defaultValue = "1") int userId)
+    @RequestMapping("/{id}/get")
+    public Object getUser(@PathVariable int id)
     {
-        return this.userService.getUser(userId);
+        Object entity = this.userService.getUser(id);
+
+        if(entity == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        return entity;
     }
 
     @ResponseBody
     @RequestMapping("/{id}/remove")
-    public Object removeUser(@RequestParam int id)
+    public Object removeUser(@PathVariable int id)
     {
-        return this.userService.removeUser(id);
+        this.userService.removeUser(id);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @RequestMapping(
@@ -58,10 +66,15 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public UserEntity createUser(@RequestBody UserEntity user) {
+    public UserEntity createUser(@RequestBody UserEntity user)
+    {
         return this.userService.createUser(user);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String getCreateUser(){
+        return "userCreate";
+    }
 
     @RequestMapping(
             value = "/{id}/update",
@@ -70,7 +83,12 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public UserEntity updateUser(@RequestParam int id, @RequestBody UserEntity user) {
+    public UserEntity updateUser(@PathVariable int id, @RequestBody UserEntity user) {
         return this.userService.updateUser(id, user);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String getUpdateUser(){
+        return "userUpdate";
     }
 }

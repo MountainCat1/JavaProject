@@ -1,0 +1,28 @@
+
+== Get Users ==
+curl --location --request POST 'http://localhost:8081/api/user/getUsers?page-size=100'
+
+== Get User ==
+curl --location --request POST 'http://localhost:8081/api/user/2/get'
+
+== Remove User ==
+curl --location --request POST 'http://localhost:8081/api/user/3/remove'
+
+== Create User ==
+curl --location --request POST 'http://localhost:8081/api/user/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "new user",
+    "email": "newUser@mail.com",
+    "id": 0
+}'
+
+== Update User
+curl --location --request POST 'http://localhost:8081/api/user/5/update' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "updated user",
+    "email": "updatedUser@mail.com",
+    "id": 0
+}'
+
