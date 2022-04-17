@@ -1,4 +1,4 @@
-package com.TomaszB.Project;
+package com.TomaszB.Lab2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(com.TomaszB.Lab2.ProjectApplication.class, args);
+		SpringApplication.run(ProjectApplication.class, args);
 	}
 
 }
